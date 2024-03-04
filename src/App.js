@@ -1,6 +1,12 @@
 import { useState } from "react";
 import {nanoid} from "nanoid";
 import NotesList from "./components/NotesList";
+import Login from "./Form/LoginPage";
+import NavBar from "./NavBar";
+import Note from "./components/Note";
+import {BrowserRouter,Routes,Route} from "react-router-dom"
+import SignUp from "./Form/SignUpPage";
+
 
 const App=()=>{
      const [notes,setNotes]=useState([
@@ -24,7 +30,7 @@ const App=()=>{
       date:"01/03/2024"
      }
     ]);
-
+<Login></Login>
     const AddNote=(text)=>{
 const  date=new Date();
 const newNote={
@@ -36,9 +42,21 @@ const newNotes=[...notes,newNote];
 setNotes(newNotes);
 }
   return (
+
      <div className="container">
-      <NotesList notes={notes} handleAddNote={AddNote}/>
+      <BrowserRouter>
+    <NavBar/>
+  
+    <Routes>
+      <Route path="/" element={<Login/>}></Route>
+      <Route path="/signup" element={<SignUp/>}></Route>
+
+      <Route path="/notes" element={<NotesList notes={notes} handleAddNote={AddNote}/>}></Route>
+
+        </Routes>
+         </BrowserRouter>   
      </div>
+     
   );
 };
 
