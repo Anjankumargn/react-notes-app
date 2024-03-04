@@ -12,6 +12,32 @@
   grid-template-columns: repeat(auto-fit,minmax(250px,2fr))
 }
 
+.note.new{
+  background-color: rgb(193, 239, 239);
+}
+
+textarea{
+  border: none;
+  resize:none;
+  background-color: rgb(228, 239, 235);
+}
+
+textarea:focus{
+  outline: none;
+}
+
+.save{
+  background-color: rgb(208, 215, 227);
+  border: none;
+  border-radius: 15px;
+  padding: 5px 10px 5px 10px;
+}
+
+.save:hover{
+  background-color: brown;
+  cursor:pointer;
+  
+}
 .note{
   background-color:blanchedalmond;
   border-radius: 10px;
