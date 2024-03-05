@@ -1,4 +1,5 @@
 import { MdDelete } from "react-icons/md";
+import Search from "./Search";
 const Note=({id,text,date})=>{
     return(
      <div className="note">
