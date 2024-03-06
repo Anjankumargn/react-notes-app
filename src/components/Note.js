@@ -1,6 +1,6 @@
 import { MdDelete } from "react-icons/md";
-import Search from "./Search";
-const Note=({id,text,date})=>{
+
+const Note=({id,Title,text,date})=>{
     return(
      <div className="note">
          <span>{text}</span>

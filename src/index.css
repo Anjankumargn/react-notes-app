@@ -31,10 +31,11 @@ textarea:focus{
   border: none;
   border-radius: 15px;
   padding: 5px 10px 5px 10px;
+  align-self: flex-end;
 }
 
 .save:hover{
-  background-color: brown;
+  background-color:aliceblue;
   cursor:pointer;
   
 }
@@ -53,4 +54,28 @@ textarea:focus{
   align-items: center;
   justify-content: space-between;
 
+}
+
+.search{
+  display: flex;
+  align-items: center;
+  background-color: aliceblue;
+  border-radius: 9px;
+  padding: 5px;
+  margin-bottom: 1.7em;
+}
+
+.search input{
+  border: none;
+  background-color: aliceblue;
+}
+.search input:focus{
+  outline: none;
+}
+
+.header{
+  display: flex;
+  align-items: center;
+  justify-content:space-between ;
+  padding: 8px;
 }
