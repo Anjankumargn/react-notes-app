@@ -4,7 +4,7 @@ import AddNote from './AddNote';
 import Search from './Search';
 import Header from './Header';
 
-const NotesList = ({ notes,handleAddNote }) => {
+const NotesList = ({ notes,handleAddNote,handleDeleteNote,}) => {
   return (
     <>
     <Header/>
@@ -15,6 +15,7 @@ const NotesList = ({ notes,handleAddNote }) => {
         id={note.id} 
         text={note.text}
         date={note.date}
+        handleDeleteNote={handleDeleteNote}
         />
         ))}
       <AddNote handleAddNote={handleAddNote}/>

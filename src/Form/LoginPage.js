@@ -1,48 +1,64 @@
-import React, { useState } from 'react';
+ import React from 'react';
 import { MDBBtn, MDBContainer, MDBCard, MDBCardBody, MDBCardImage, MDBRow, MDBCol,  MDBInput, } from 'mdb-react-ui-kit';
-import logo from '../assets/240_F_270728627_D6gk2X8Tn8lw2I9yxMpnT0hirBCIHQsL.jpg';
+ import login from "../assets/240_F_270728627_D6gk2X8Tn8lw2I9yxMpnT0hirBCIHQsL.jpg";
 import {Link} from "react-router-dom";
-import axios from 'axios';
+// import axios from 'axios';
+import { useState } from 'react';
+import {useNavigate} from "react-router-dom"
+import {getAuth,signInWithEmailAndPassword} from "firebase/auth";
 
-const handleSubmit=async (e,formData)=>{
-  e.preventDefault();
-  try {
-    const response = await axios.post('/api/login', formData);
-    console.log("Login successfull",response.data);
-  }catch (error) {
-    console.error('Login failed:', error);
-  }
-  };
+// const handleSubmit=async (e,formData)=>{
+//   e.preventDefault();
+  // try {
+  //   const response = await axios.post('/api/login', formData);
+  //   console.log("Login successfull",response.data);
+  // }catch (error) {
+  //   console.error('Login failed:', error);
+  // }
+  // };
   
 
-
-
 function Login() {
-  const [email,setemail]=useState("")
-  const [password,setpassword]=useState("")
+  // const [email,setemail]=useState("")
+  // const [password,setpassword]=useState("")
+  const [email,setemail]=useState('');
+    const [password,setpassword]=useState('');
+    const [error,seterror]=useState('');
+
+    const navigate=useNavigate();
+
+    const logIn=async()=>{
+        try{
+            await signInWithEmailAndPassword(getAuth(),email,password)
+            navigate('/notes')
+        }catch(error){
+            seterror(error.message);
+        }
+    }
 
   return (
     <MDBContainer className="my-5">
       <MDBCard>
         <MDBRow className='g-0'>
           <MDBCol md='6'>
-            <MDBCardImage src={logo} alt="Logo" className='rounded-start w-100' />
+            { <MDBCardImage src={login} alt="Logo" className='rounded-start w-100' />  }
           </MDBCol>
           <MDBCol md='6'>
             <MDBCardBody className='d-flex flex-column'>
               <div className='d-flex flex-row mt-2'>
                 
-                <span className="h1 fw-bold mb-0">UPNOTE</span>
+                <span className="h1 fw-bold mb-0"></span>
               </div>
               <h5 className="fw-normal my-4 pb-3" style={{ letterSpacing: '1px' }}>Login into your account</h5>
-              <form className="signup_form" onSubmit={(e)=>handleSubmit(e,{email,password})}>
+              {error && <p className="error" >{error}</p>} 
+              {/* <form className="signup_form" onSubmit={(e)=>handleSubmit(e,{email,password})}> */}
 
-              <MDBInput wrapperClass='mb-4' onChange={e=>setemail(e.target.value)} value={email} label='Email address' id='formControlLg' type='email' size="lg" />
-              <MDBInput wrapperClass='mb-4' onChange={e=>setpassword(e.target.value)} value={password} label='Password' id='formControlLg' type='password' size="lg" />
-              <MDBBtn className="mb-4 px-5" color='dark' size='lg' >Login</MDBBtn>
-              </form>
+              <MDBInput wrapperClass='mb-4' onChange={e=>setemail(e.target.value)}  value={email} label='Email address' id='formControlLg' type='email' size="lg" />
+              <MDBInput wrapperClass='mb-4' onChange={e=>setpassword(e.target.value)}  value={password} label='Password' id='formControlLg' type='password' size="lg" />
+              <MDBBtn className="mb-4 px-5" color='dark' size='lg'onClick={logIn}>Login</MDBBtn>
+              {/* </form> */}
               <a className="small text-muted" href="#!">Forgot password?</a>
-              <p className="mb-5 pb-lg-2" style={{ color: '#393f81' }}>Don't have an account? <a href="#!" style={{ color: '#393f81' }}>
+              <p className="mb-5 pb-lg-2" style={{ color: '#393f81' }}>Don't have an account? <a href="#!" style={{ color: '#393f81' }}> 
                 <Link to ="/signup">SignUp</Link></a></p>   
             </MDBCardBody>
           </MDBCol>
@@ -52,4 +68,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Login;// 

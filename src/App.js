@@ -8,6 +8,8 @@ import NavBar from "./NavBar";
 import {BrowserRouter,Routes,Route} from "react-router-dom"
 import SignUp from "./Form/SignUpPage";
 import DummyData from './components/Dummydata';
+import Search from './components/Search';
+import Header from './components/Header'; 
 
 const App=()=>{
      const [notes,setNotes]=useState([
@@ -31,8 +33,14 @@ const App=()=>{
       date:"01/03/2024"
      }
     ]);
+
+    const [searchText,setSearchText]=useState('');
+
+    const [darkMode, setDarkMode] = useState(false);
+
 <Login></Login>
- const AddNote=(text)=>{
+
+ const addNote=(text)=>{
 const  date=new Date();
 const newNote={
   id:nanoid(),  
@@ -41,22 +49,39 @@ const newNote={
 }
 const newNotes=[...notes,newNote];
 setNotes(newNotes);
-}
+};
+
+ const deleteNote = (id) => {
+   const newNotes = notes.filter((note) => note.id !== id);
+   setNotes(newNotes);
+ };
   return (
 
-     <div className="container">
-      
-      <BrowserRouter>
-    <NavBar/>
-    <Routes>
+     <div className={`${darkMode && 'dark-mode'}`}>
+     <div className='container'>
+      <Header handleToggleDarkMode={setDarkMode} /> 
+       <Search handleSearchNote={setSearchText} /> 
+       <NotesList
+        notes={notes.filter((note) =>
+          note.text.toLowerCase().includes(searchText)
+        )}
+        handleAddNote={addNote}
+        handleDeleteNote={deleteNote}></NotesList> 
+       
+
+
+        <NavBar/>
+        <BrowserRouter>
+        <Routes>
       <Route path="/" element={<Login/>}></Route>
       <Route path="/signup" element={<SignUp/>}></Route>
-      <Route path="/notes" element={<NotesList notes={notes} handleAddNote={AddNote}/>}></Route>
+      <Route path="/notes" element={<NotesList notes={notes} handleAddNote={addNote}/>}></Route>
       <Route path='/dummy' element={<DummyData/>}></Route>
         </Routes>
          </BrowserRouter>   
      </div>
-     
+     </div>
+
   );
 };
 

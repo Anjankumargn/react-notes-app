@@ -79,3 +79,11 @@ textarea:focus{
   justify-content:space-between ;
   padding: 8px;
 }
+
+.dark-mode {
+	background-color: black;
+}
+
+.dark-mode h1 {
+	color: white;
+}
