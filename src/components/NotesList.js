@@ -1,14 +1,14 @@
 import React from 'react';
 import Note from './Note';
 import AddNote from './AddNote';
-import Search from './Search';
-import Header from './Header';
+// import Search from './Search';
+// import Header from './Header';
 
 const NotesList = ({ notes,handleAddNote,handleDeleteNote,}) => {
   return (
     <>
-    <Header/>
-    <Search/>
+    {/* <Header/> */}
+    {/* <Search/> */}
     <div className="notes-list">
       {notes.map((note) => (
         <Note 
